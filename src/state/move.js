@@ -5,12 +5,12 @@
 */
 
 const board = [
-  [2, null, 4, null, 4, 2],
-  [4,    4, 4, null, 2, 2],
-  [2,    2, 4,    4, 4, 2],
-  [2,    8, 4, null, 4, 4],
-  [2,    8, 4, null, 4, 4],
-  [2,    8, 4, null, 4, 4],
+  [2, 0, 4, 0, 4, 2],
+  [4, 4, 4, 0, 2, 2],
+  [2, 2, 4, 4, 4, 2],
+  [2, 8, 4, 0, 4, 4],
+  [2, 8, 4, 0, 4, 4],
+  [2, 8, 4, 0, 4, 4],
 ];
 
 function rotateBoardLeft(board) {
@@ -29,10 +29,10 @@ function rotateBoardLeft(board) {
 };
 
 function moveRowLeft(row) {
-  const newRow = Array(row.length).fill(null);
+  const newRow = Array(row.length).fill(0);
   let k = 0;
 
-  row.filter(x => x !== null).forEach(x => {
+  row.filter(x => x !== 0).forEach(x => {
     newRow[k++] = x;
   });
 
@@ -40,11 +40,11 @@ function moveRowLeft(row) {
 }
 
 function mergeRowFromLeft(row) {
-  const newRow = Array(row.length).fill(null);
+  const newRow = Array(row.length).fill(0);
   let mergedJ = null;
 
   for (let j = 0; j < row.length; j++) {
-    if (mergedJ === null && j + 1 < row.length && row[j] !== null && row[j] === row[j + 1]) {
+    if (mergedJ === null && j + 1 < row.length && row[j] !== 0 && row[j] === row[j + 1]) {
       newRow[j] = 2 * row[j];
       mergedJ = j + 1;
     } else if (j !== mergedJ) {
@@ -103,4 +103,4 @@ console.log('---');
   return board;
 }
 
-console.log(move(board, 'right'));
+console.log(move(board, 'up'));
