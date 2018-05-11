@@ -9,6 +9,7 @@ class App extends Component {
       <div className="App">
         <h1>2048</h1>
         <Menu />
+        <h2>Score: 10</h2>
       </div>
     );
   }
