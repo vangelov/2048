@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Menu } from './Menu';
+import { Board } from './Board';
 import './style.css';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
         <h1>2048</h1>
         <Menu />
         <h2>Score: 10</h2>
+        <Board />
       </div>
     );
   }

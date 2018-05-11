@@ -1,0 +1,59 @@
+
+.Cell {
+  height: 100px;
+  width: 100px;
+  background-color: #303030;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Cell-Color-2 {
+  background-color: #50C8FF;
+}
+
+.Cell-Color-4 {
+  background-color: green;
+}
+
+.Cell-Color-8 {
+  background-color: red;
+}
+
+.Cell-Color-16 {
+  background-color: orange;
+}
+
+.Cell-Color-32 {
+  background-color: yellow;
+}
+
+.Cell-Color-64 {
+  background-color: blue;
+}
+
+.Cell-Color-128 {
+  background-color: purple;
+}
+
+.Cell-Color-256 {
+  background-color: pink;
+}
+
+.Cell-Color-512 {
+  background-color: #50C8FF;
+}
+
+.Cell-Color-1024 {
+  background-color: green;
+}
+
+.Cell-Color-2048 {
+  background-color: blue;
+}
+
+.Cell .number {
+  color: #FFF;
+  font-size: 35px;
+}
