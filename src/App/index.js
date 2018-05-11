@@ -11,7 +11,7 @@ class App extends Component {
         <h1>2048</h1>
         <Menu />
         <h2>Score: 10</h2>
-        <Board />
+        <Board board={[[4, 4], [2, 2]]} />
       </div>
     );
   }

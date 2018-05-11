@@ -5,27 +5,21 @@ import Cell from './Cell';
 import './style.css';
 
 export function Board(props) {
+  const { board } = props;
+
   return (
     <table>
-      <tr>
-        <td>
-          <Cell value="4" />
-        </td>
-
-        <td>
-          <Cell value="256" />
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <Cell />
-        </td>
-
-        <td>
-          <Cell />
-        </td>
-      </tr>
+      <tbody>
+        {board.map((row, i) => (
+          <tr key={i}>
+            {row.map((value, j) => (
+              <td key={j}>
+                <Cell value={value} />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }
