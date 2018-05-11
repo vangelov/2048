@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>fsdfd</h1>
+        <h1>2048</h1>
         <Menu />
       </div>
     );

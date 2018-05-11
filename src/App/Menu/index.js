@@ -2,15 +2,14 @@ import React from 'react';
 
 import './style.css';
 import Button from '../__shared__/Button';
+import SizeLabel from './SizeLabel';
 
 export function Menu(props) {
   return (
     <div className="Menu">
-      <h1>Test</h1>
+      <SizeLabel />
       <Button label="New Game" />
       <Button label="Redo" />
-
-      <div>Current score</div>
     </div>
   );
 }
