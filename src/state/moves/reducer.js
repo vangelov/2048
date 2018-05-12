@@ -1,15 +1,5 @@
 
-import { GAME_NEW, BOARD_MOVE_RIGHT, BOARD_MOVE_UP, BOARD_MOVE_LEFT, BOARD_MOVE_DOWN } from './actions';
-
-const initialState = {
-  score: 0,
-  board: [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-  ]
-};
+import { MOVE_UNDO, MOVE_INIT, MOVE_LEFT, MOVE_RIGHT, MOVE_DOWN, MOVE_UP } from './actions';
 
 function getFreePositions(board) {
   const freePositions = [];
@@ -105,10 +95,10 @@ down: 3
 
 function move(board, dir) {
   const turnsToNormalizeForDir = {
-    BOARD_MOVE_LEFT: 0,
-    BOARD_MOVE_UP: 1,
-    BOARD_MOVE_RIGHT: 2,
-    BOARD_MOVE_DOWN: 3
+    MOVE_LEFT: 0,
+    MOVE_UP: 1,
+    MOVE_RIGHT: 2,
+    MOVE_DOWN: 3
   };
   const turns = turnsToNormalizeForDir[dir];
 
@@ -125,25 +115,48 @@ function move(board, dir) {
   return board;
 }
 
+function createBoard(size) {
+  const board = new Array(size);
+
+  for (let i = 0; i < size; i++) {
+    board[i] = new Array(size).fill(0);
+  }
+
+  return board;
+}
+
+const initialState = [];
+
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GAME_NEW:
-      return {
-        ...state,
-        board: insertRandomNumber(state.board, getFreePositions(state.board))
-      };
+    case MOVE_INIT:
+      const initBoard = createBoard(action.size);
 
-    case BOARD_MOVE_UP:
-    case BOARD_MOVE_DOWN:
-    case BOARD_MOVE_LEFT:
-    case BOARD_MOVE_RIGHT:
-      const movedBoard = move(state.board, action.type);
+      return [
+        {
+          board: insertRandomNumber(initBoard, getFreePositions(initBoard)),
+          scoreWon: 0
+        }
+      ];
+
+    case MOVE_UP:
+    case MOVE_DOWN:
+    case MOVE_LEFT:
+    case MOVE_RIGHT:
+      const { board } = state[state.length - 1];
+      const movedBoard = move(board, action.type);
       const updatedBoard = insertRandomNumber(movedBoard, getFreePositions(movedBoard));
 
-      return {
+      return [
         ...state,
-        board: updatedBoard
-      }
+        {
+          board: updatedBoard,
+          scoreWon: 0
+        }
+      ];
+
+    case MOVE_UNDO:
+      return state.slice(0, state.length - 1);
 
     default:
       return state;

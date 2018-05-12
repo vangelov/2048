@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Menu } from './Menu';
+import Menu from './Menu';
 import Board from './Board';
 import * as actions from '../state/actions';
 import './style.css';
 
 class App extends Component {
 
+  componentWillMount() {
+    this.props.onWillMount();
+  }
+
   componentDidMount() {
     const body = document.querySelector('body');
     body.addEventListener('keydown', this.handleKeyDown);
-
-    this.props.onDidMount();
   }
 
   componentWillUnmount() {
@@ -50,27 +52,25 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-
-  };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDidMount: () => {
-      dispatch(actions.gameNew());
+    onWillMount: () => {
+      dispatch(actions.moveInit());
     },
     onKeyUp: () => {
-      dispatch(actions.boardMoveUp());
+      dispatch(actions.moveUp());
     },
     onKeyRight: () => {
-      dispatch(actions.boardMoveRight());
+      dispatch(actions.moveRight());
     },
     onKeyDown: () => {
-      dispatch(actions.boardMoveDown());
+      dispatch(actions.moveDown());
     },
     onKeyLeft: () => {
-      dispatch(actions.boardMoveLeft());
+      dispatch(actions.moveLeft());
     },
   };
 };

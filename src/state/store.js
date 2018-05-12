@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './state';
+import rootReducer from './reducer';
 
 const initialState = {};
 const enhancers = [];

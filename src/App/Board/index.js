@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Cell from './Cell';
+import { getBoard } from '../../state/selectors';
 import './style.css';
 
 export function Board(props) {
@@ -27,14 +28,12 @@ export function Board(props) {
 
 const mapStateToProps = (state) => {
   return {
-    board: state.game.board
+    board: getBoard(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-
-  };
+  return {};
 };
 
 export default connect(

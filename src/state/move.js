@@ -25,7 +25,7 @@ function rotateBoardLeft(board) {
       rotatedBoard[i][j] = board[j][columnsCount - i - 1];
     }
   }
-  
+
   return rotatedBoard;
 };
 
@@ -89,7 +89,7 @@ function move(board, dir) {
   const turns = turnsToNormalizeForDir[dir];
 
   for (let i = 0; i < turns; i++) {
-    board = rotateBoardLeft(board);
+    board = rotateBoardLeft(board); 
   }
   console.log(board);
   board = moveBoardLeft(board);
