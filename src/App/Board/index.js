@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Cell from './Cell';
 import './style.css';
@@ -23,3 +24,20 @@ export function Board(props) {
     </table>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    board: state.game.board
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board);

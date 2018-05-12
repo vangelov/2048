@@ -1,17 +1,41 @@
-/*
-. 4 4 .
-2 . 4 4
-2 2 4 4
-*/
 
-const board = [
-  [2, 0, 4, 0, 4, 2],
-  [4, 4, 4, 0, 2, 2],
-  [2, 2, 4, 4, 4, 2],
-  [2, 8, 4, 0, 4, 4],
-  [2, 8, 4, 0, 4, 4],
-  [2, 8, 4, 0, 4, 4],
-];
+import { GAME_NEW, BOARD_MOVE_RIGHT, BOARD_MOVE_UP, BOARD_MOVE_LEFT, BOARD_MOVE_DOWN } from './actions';
+
+const initialState = {
+  score: 0,
+  board: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ]
+};
+
+function getFreePositions(board) {
+  const freePositions = [];
+  const rowsCount = board.length;
+  const columnsCount = board[0].length;
+
+  for (let i = 0; i < rowsCount; i++) {
+    for (let j = 0; j < columnsCount; j++) {
+      if (board[i][j] === 0) {
+        freePositions.push({ i, j })
+      }
+    }
+  }
+
+  return freePositions;
+}
+
+function insertRandomNumber(board, freePositions) {
+  const index = Math.floor(Math.random() * freePositions.length);
+  const { i, j } = freePositions[index];
+  const newBoard = JSON.parse(JSON.stringify(board));
+
+  newBoard[i][j] = 2;
+
+  return newBoard;
+}
 
 function rotateBoardLeft(board) {
   const rotatedBoard = [];
@@ -25,7 +49,7 @@ function rotateBoardLeft(board) {
       rotatedBoard[i][j] = board[j][columnsCount - i - 1];
     }
   }
-  
+
   return rotatedBoard;
 };
 
@@ -81,27 +105,47 @@ down: 3
 
 function move(board, dir) {
   const turnsToNormalizeForDir = {
-    left: 0,
-    up: 1,
-    right: 2,
-    down: 3
+    BOARD_MOVE_LEFT: 0,
+    BOARD_MOVE_UP: 1,
+    BOARD_MOVE_RIGHT: 2,
+    BOARD_MOVE_DOWN: 3
   };
   const turns = turnsToNormalizeForDir[dir];
 
   for (let i = 0; i < turns; i++) {
     board = rotateBoardLeft(board);
   }
-  console.log(board);
-  board = moveBoardLeft(board);
-  console.log(board, turns);
 
-console.log('---');
+  board = moveBoardLeft(board);
+
   for (let i = 0; i < 4 - turns; i++) {
     board = rotateBoardLeft(board);
-    console.log(board);
   }
 
   return board;
 }
 
-console.log(move(board, 'up'));
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case GAME_NEW:
+      return {
+        ...state,
+        board: insertRandomNumber(state.board, getFreePositions(state.board))
+      };
+
+    case BOARD_MOVE_UP:
+    case BOARD_MOVE_DOWN:
+    case BOARD_MOVE_LEFT:
+    case BOARD_MOVE_RIGHT:
+      const movedBoard = move(state.board, action.type);
+      const updatedBoard = insertRandomNumber(movedBoard, getFreePositions(movedBoard));
+
+      return {
+        ...state,
+        board: updatedBoard
+      }
+
+    default:
+      return state;
+  }
+};
