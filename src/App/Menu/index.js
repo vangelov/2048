@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import './style.css';
 import Button from '../__shared__/Button';
 import SizeLabel from './SizeLabel';
-import { canUndo } from '../../state/selectors';
+import { canUndo, getBoardSize } from '../../state/selectors';
 import * as actions from '../../state/actions';
 
 export function Menu(props) {
-  const { canUndo } = props;
+  const { canUndo, boardSize } = props;
 
   function handleNewGame() {
-    props.onNewGame();
+    props.onNewGame(boardSize);
   }
 
   function handleUndo() {
@@ -31,7 +31,8 @@ export function Menu(props) {
 
 const mapStateToProps = (state) => {
   return {
-    canUndo: canUndo(state)
+    canUndo: canUndo(state),
+    boardSize: getBoardSize(state)
   };
 };
 
@@ -39,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onUndo: () => {
       dispatch(actions.moveUndo());
+    },
+    onNewGame: (boardSize) => {
+      dispatch(actions.moveInit(boardSize))
     }
   };
 };
