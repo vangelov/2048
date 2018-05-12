@@ -1,21 +1,5 @@
 import * as actions from './actions';
 
-function rotateLeft(board) {
-  const rotatedBoard = [];
-  const rowsCount = board.length;
-  const columnsCount = board[0].length;
-
-  for (let i = 0; i < rowsCount; i++) {
-    rotatedBoard.push([]);
-
-    for (let j = 0; j < columnsCount; j++) {
-      rotatedBoard[i][j] = board[j][columnsCount - i - 1];
-    }
-  }
-
-  return rotatedBoard;
-};
-
 function moveRowLeft(row) {
   const newRow = Array(row.length).fill(0);
   let k = 0;
@@ -72,12 +56,30 @@ function moveLeft(board) {
   return { movedBoard, scoreWon };
 }
 
+function rotateLeft(board) {
+  const rotatedBoard = [];
+  const rowsCount = board.length;
+  const columnsCount = board[0].length;
+
+  for (let i = 0; i < rowsCount; i++) {
+    rotatedBoard.push([]);
+
+    for (let j = 0; j < columnsCount; j++) {
+      rotatedBoard[i][j] = board[j][columnsCount - i - 1];
+    }
+  }
+
+  return rotatedBoard;
+};
+
 const turnsToNormalizeForActionType = {
   [actions.MOVE_LEFT]: 0,
   [actions.MOVE_UP]: 1,
   [actions.MOVE_RIGHT]: 2,
   [actions.MOVE_DOWN]: 3
 };
+
+const turnsTypesCount = Object.keys(turnsToNormalizeForActionType).length;
 
 function moveBoard(board, actionType) {
   const turns = turnsToNormalizeForActionType[actionType];
@@ -89,7 +91,7 @@ function moveBoard(board, actionType) {
 
   let { movedBoard: movedAndRotatedBoard, scoreWon } = moveLeft(rotatedBoard);
 
-  for (let i = 0; i < 4 - turns; i++) {
+  for (let i = 0; i < turnsTypesCount - turns; i++) {
     movedAndRotatedBoard = rotateLeft(movedAndRotatedBoard);
   }
 
