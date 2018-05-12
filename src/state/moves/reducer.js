@@ -89,6 +89,10 @@ export default (state = initialState, action) => {
       };
 
     case MOVE_UNDO:
+      if (state.list.length === 1) {
+        return state;
+      }
+
       return {
         ...state,
         list: state.list.slice(0, state.list.length - 1)
