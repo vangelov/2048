@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case MOVE_INIT:
-      if (action.onlyIfNoSavedState && state.list.length > 0) {
+      if (action.onlyIfNoSavedState && state.list.length > 1) {
         return state;
       }
 
