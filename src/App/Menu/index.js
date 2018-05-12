@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './style.css';
-import Button from '../__shared__/Button';
+import Button from './Button';
 import SizeLabel from './SizeLabel';
 import { canUndo, getBoardSize } from '../../state/selectors';
 import * as actions from '../../state/actions';
