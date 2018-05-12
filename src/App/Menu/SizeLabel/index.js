@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import * as actions from '../../../state/actions';
 import { getBoardSize } from '../../../state/selectors';
@@ -18,6 +19,11 @@ export function SizeLabel(props) {
     </div>
   );
 }
+
+SizeLabel.propTypes = {
+  size: PropTypes.number,
+  onSizeChange: PropTypes.func
+};
 
 const mapStateToProps = (state) => {
   return {

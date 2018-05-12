@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './style.css';
 import Button from '../__shared__/Button';
@@ -28,6 +29,13 @@ export function Menu(props) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  canUnfo: PropTypes.bool,
+  boardSize: PropTypes.number,
+  onUndo: PropTypes.func,
+  onNewGame: PropTypes.func
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Menu from './Menu';
 import Board from './Board';
@@ -54,6 +55,16 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  score: PropTypes.number,
+  boardSize: PropTypes.number,
+  onWillMount: PropTypes.func,
+  onKeyUp: PropTypes.func,
+  onKeyRight: PropTypes.func,
+  onKeyLeft: PropTypes.func,
+  onKeyDown: PropTypes.func
+};
 
 const mapStateToProps = (state) => {
   return {

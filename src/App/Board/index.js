@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Cell from './Cell';
 import { getBoard } from '../../state/selectors';
@@ -25,6 +26,12 @@ export function Board(props) {
     </table>
   );
 }
+
+Board.propTypes = {
+  board: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number)
+  )
+};
 
 const mapStateToProps = (state) => {
   return {
