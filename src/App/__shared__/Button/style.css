@@ -12,3 +12,8 @@
   align-items: center;
   cursor: pointer;
 }
+
+.Button-Disabled {
+  opacity: 0.1;
+  cursor: not-allowed;
+}

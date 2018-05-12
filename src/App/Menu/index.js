@@ -4,35 +4,40 @@ import { connect } from 'react-redux';
 import './style.css';
 import Button from '../__shared__/Button';
 import SizeLabel from './SizeLabel';
+import { canUndo } from '../../state/selectors';
 import * as actions from '../../state/actions';
 
 export function Menu(props) {
+  const { canUndo } = props;
+
   function handleNewGame() {
     props.onNewGame();
   }
 
   function handleUndo() {
-    console.log('fdsdf');
-    props.onUndo();
+    if (props.canUndo) {
+      props.onUndo();
+    }
   }
 
   return (
     <div className="Menu">
       <SizeLabel />
       <Button label="New Game" onClick={handleNewGame} />
-      <Button label="Undo" onClick={handleUndo} />
+      <Button label="Undo" enabled={canUndo} onClick={handleUndo} />
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    canUndo: canUndo(state)
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onUndo: () => {
-      console.log('undo');
       dispatch(actions.moveUndo());
     },
   };
