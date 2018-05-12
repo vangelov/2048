@@ -20,14 +20,14 @@ function getCachedRandom(key, rngCache) {
 }
 
 function getNextNumber(movesCount, rngCache) {
-  return getCachedRandom(movesCount, rngCache) < 0.5 ? 2 : 4;
+  return getCachedRandom(`number-${movesCount}`, rngCache) < 0.5 ? 2 : 4;
 }
 
 function getNextFreePosition(board, movesCount, rngCache) {
   const freePositions = boardUtils.getFreePositions(board);
 
   if (freePositions.length > 0) {
-    const randomNumber = getCachedRandom(movesCount, rngCache);
+    const randomNumber = getCachedRandom(`position-${movesCount}`, rngCache);
     const positionIndex = Math.floor(randomNumber * freePositions.length);
     return freePositions[positionIndex];
   }
@@ -42,9 +42,11 @@ function addRandomNumberAtRandomPosition(board, movesCount, rngCache) {
 }
 
 export default (state = initialState, action) => {
+  let rngCache;
+
   switch (action.type) {
     case MOVE_INIT:
-      const rngCache = {};
+      rngCache = {};
       let initBoard = boardUtils.create(action.size);
       initBoard = addRandomNumberAtRandomPosition(initBoard, state.list.length, rngCache);
 
@@ -62,12 +64,17 @@ export default (state = initialState, action) => {
     case MOVE_DOWN:
     case MOVE_LEFT:
     case MOVE_RIGHT:
+      rngCache = {
+        ...state.rngCache
+      };
+
       const { board } = state.list[state.list.length - 1];
       let { movedBoard, scoreWon } = moveBoard(board, action.type);
-      movedBoard = addRandomNumberAtRandomPosition(movedBoard, state.list.length, state.rngCache);
+      movedBoard = addRandomNumberAtRandomPosition(movedBoard, state.list.length, rngCache);
 
       return {
         ...state,
+        rngCache,
         list: [
           ...state.list,
           {

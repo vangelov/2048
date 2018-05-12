@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onUndo: () => {
       dispatch(actions.moveUndo());
-    },
+    }
   };
 };
 
