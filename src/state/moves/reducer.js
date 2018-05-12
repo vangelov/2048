@@ -46,8 +46,12 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case MOVE_INIT:
+      if (action.onlyIfNoSavedState && state.list.length > 0) {
+        return state;
+      }
+
       rngCache = {};
-      let initBoard = boardUtils.create(action.size);
+      let initBoard = boardUtils.create(action.boardSize);
       initBoard = addRandomNumberAtRandomPosition(initBoard, state.list.length, rngCache);
 
       return {

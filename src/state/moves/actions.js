@@ -11,7 +11,11 @@ export const MOVE_LEFT = 'MOVE_LEFT';
 export const moveLeft = () => ({ type: MOVE_LEFT });
 
 export const MOVE_INIT = 'MOVE_INIT';
-export const moveInit = (size = 4) => ({ type: MOVE_INIT, size });
+export const moveInit = ({ boardSize, onlyIfNoSavedState }) => ({
+  type: MOVE_INIT,
+  boardSize,
+  onlyIfNoSavedState
+});
 
 export const MOVE_UNDO = 'MOVE_UNDO';
 export const moveUndo = () => ({ type: MOVE_UNDO });

@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 
 import Menu from './Menu';
 import Board from './Board';
-import { getScore } from '../state/selectors';
+import { getScore, getBoardSize } from '../state/selectors';
 import * as actions from '../state/actions';
 import './style.css';
 
 class App extends Component {
 
   componentWillMount() {
-    this.props.onWillMount();
+    const { onWillMount, boardSize } = this.props;
+    onWillMount(boardSize);
   }
 
   componentDidMount() {
@@ -42,7 +43,7 @@ class App extends Component {
 
   render() {
     const { score } = this.props;
-    
+
     return (
       <div className="App">
         <h1>2048</h1>
@@ -56,14 +57,15 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    score: getScore(state)
+    score: getScore(state),
+    boardSize: getBoardSize(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onWillMount: () => {
-      dispatch(actions.moveInit());
+    onWillMount: (boardSize) => {
+      dispatch(actions.moveInit({ boardSize, onlyIfNoSavedState: true }));
     },
     onKeyUp: () => {
       dispatch(actions.moveUp());

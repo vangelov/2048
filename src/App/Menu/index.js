@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.moveUndo());
     },
     onNewGame: (boardSize) => {
-      dispatch(actions.moveInit(boardSize))
+      dispatch(actions.moveInit({ boardSize, onlyIfNoSavedState: false }))
     }
   };
 };
