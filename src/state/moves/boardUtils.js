@@ -24,20 +24,13 @@ export function create(size) {
   return board;
 }
 
-export const addNumber = (number, position, getNextFreePosition) => (board) => {
-  let finalPosition = position;
-
+export function addNumber(board, number, position) {
   if (!position) {
-    finalPosition = getNextFreePosition(board);
-
-    if (!finalPosition) {
-      return board;
-    }
+    return board;
   }
 
-  const { i, j } = finalPosition;
+  const { i, j } = position;
   const newBoard = JSON.parse(JSON.stringify(board));
   newBoard[i][j] = number;
-
   return newBoard;
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Menu from './Menu';
 import Board from './Board';
+import { getScore } from '../state/selectors';
 import * as actions from '../state/actions';
 import './style.css';
 
@@ -40,11 +41,13 @@ class App extends Component {
   }
 
   render() {
+    const { score } = this.props;
+    
     return (
       <div className="App">
         <h1>2048</h1>
         <Menu />
-        <h2>Score: 10</h2>
+        <h2>Score: {score}</h2>
         <Board />
       </div>
     );
@@ -52,7 +55,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    score: getScore(state)
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {

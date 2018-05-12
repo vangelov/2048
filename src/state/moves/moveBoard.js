@@ -28,59 +28,72 @@ function moveRowLeft(row) {
 }
 
 function mergeRowFromLeft(row) {
-  const newRow = Array(row.length).fill(0);
+  const mergedRow = Array(row.length).fill(0);
   let mergedJ = null;
+  let rowScoreWon = 0;
 
   for (let j = 0; j < row.length; j++) {
     if (mergedJ === null && j + 1 < row.length && row[j] !== 0 && row[j] === row[j + 1]) {
-      newRow[j] = 2 * row[j];
+      mergedRow[j] = 2 * row[j];
+      rowScoreWon = mergedRow[j];
       mergedJ = j + 1;
     } else if (j !== mergedJ) {
-      newRow[j] = row[j];
+      mergedRow[j] = row[j];
     }
   }
 
-  return { newRow, madeMerge: mergedJ !== null };
+  return {
+    mergedRow,
+    rowScoreWon,
+    madeMerge: mergedJ !== null
+  };
 }
 
 function moveLeft(board) {
-  const result = [];
+  const movedBoard = [];
+  let scoreWon = 0;
 
   for (const row of board) {
     let newRow = moveRowLeft(row);
-    const { newRow: rowAfterMerge, madeMerge } = mergeRowFromLeft(newRow);
+    const {
+      mergedRow,
+      rowScoreWon,
+      madeMerge
+    } = mergeRowFromLeft(newRow);
 
     if (madeMerge) {
-      newRow = moveRowLeft(rowAfterMerge);;
+      newRow = moveRowLeft(mergedRow);;
     }
 
-    result.push(newRow);
+    scoreWon += rowScoreWon;
+    movedBoard.push(newRow);
   }
 
-  return result;
+  return { movedBoard, scoreWon };
 }
 
-const turnsToNormalizeForDir = {
+const turnsToNormalizeForActionType = {
   [actions.MOVE_LEFT]: 0,
   [actions.MOVE_UP]: 1,
   [actions.MOVE_RIGHT]: 2,
   [actions.MOVE_DOWN]: 3
 };
 
-const moveBoard = (dir) => (board) => {
-  const turns = turnsToNormalizeForDir[dir];
+function moveBoard(board, actionType) {
+  const turns = turnsToNormalizeForActionType[actionType];
+  let rotatedBoard = board;
 
   for (let i = 0; i < turns; i++) {
-    board = rotateLeft(board);
+    rotatedBoard = rotateLeft(rotatedBoard);
   }
 
-  board = moveLeft(board);
+  let { movedBoard: movedAndRotatedBoard, scoreWon } = moveLeft(rotatedBoard);
 
   for (let i = 0; i < 4 - turns; i++) {
-    board = rotateLeft(board);
+    movedAndRotatedBoard = rotateLeft(movedAndRotatedBoard);
   }
 
-  return board;
+  return { movedBoard: movedAndRotatedBoard, scoreWon };
 }
 
 export default moveBoard;
