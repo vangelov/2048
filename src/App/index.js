@@ -25,20 +25,23 @@ class App extends Component {
     body.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown = ({ keyCode }) => {
     const up = 38;
     const right = 39;
     const down = 40;
-    const left = 37
+    const left = 37;
+    const z = 90;
 
-    if (e.keyCode === up) {
+    if (keyCode === up) {
       this.props.onKeyUp();
-    } else if (e.keyCode === right) {
+    } else if (keyCode === right) {
       this.props.onKeyRight();
-    } else if (e.keyCode === down) {
+    } else if (keyCode === down) {
       this.props.onKeyDown();
-    } else if (e.keyCode === left) {
+    } else if (keyCode === left) {
       this.props.onKeyLeft();
+    } else if (keyCode === z) {
+      this.props.onKeyZ();
     }
   }
 
@@ -64,6 +67,7 @@ App.propTypes = {
   onKeyRight: PropTypes.func,
   onKeyLeft: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onKeyZ: PropTypes.func,
   canMakeMoreMoves: PropTypes.bool
 };
 
@@ -92,6 +96,9 @@ const mapDispatchToProps = (dispatch) => {
     onKeyLeft: () => {
       dispatch(actions.moveLeft());
     },
+    onKeyZ: () => {
+      dispatch(actions.moveUndo())
+    }
   };
 };
 

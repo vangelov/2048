@@ -25,7 +25,7 @@ export function Menu(props) {
     <div className="Menu">
       <SizeLabel />
       <Button label="New Game" onClick={handleNewGame} />
-      <Button label="Undo" enabled={canUndo} onClick={handleUndo} />
+      <Button label="Undo (Z)" enabled={canUndo} onClick={handleUndo} />
     </div>
   );
 }
