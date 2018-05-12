@@ -2,7 +2,7 @@
 .Cell {
   height: 100px;
   width: 100px;
-  background-color: #303030;
+  background-color: #cfc1b4;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -10,47 +10,47 @@
 }
 
 .Cell-Color-2 {
-  background-color: #50C8FF;
+  background-color: #eee4da;
 }
 
 .Cell-Color-4 {
-  background-color: green;
+  background-color: #ede0c8;
 }
 
 .Cell-Color-8 {
-  background-color: red;
+  background-color: #f2b179;
 }
 
 .Cell-Color-16 {
-  background-color: orange;
+  background-color: #f59563;
 }
 
 .Cell-Color-32 {
-  background-color: yellow;
+  background-color: #f67c5f;
 }
 
 .Cell-Color-64 {
-  background-color: blue;
+  background-color: #f65e3b;
 }
 
 .Cell-Color-128 {
-  background-color: purple;
+  background-color: #edcf72;
 }
 
 .Cell-Color-256 {
-  background-color: pink;
+  background-color: #edcc61;
 }
 
 .Cell-Color-512 {
-  background-color: #50C8FF;
+  background-color: #edc850;
 }
 
 .Cell-Color-1024 {
-  background-color: green;
+  background-color: #edc53f;
 }
 
 .Cell-Color-2048 {
-  background-color: blue;
+  background-color: #edc22e;
 }
 
 .Cell .number {
