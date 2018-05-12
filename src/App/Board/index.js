@@ -10,7 +10,7 @@ export function Board(props) {
   const { board } = props;
 
   return (
-    <table>
+    <table className="Board">
       <tbody>
         {board.map((row, i) => (
           <tr key={i}>
