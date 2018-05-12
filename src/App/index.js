@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Menu from './Menu';
 import Board from './Board';
-import { getScore, getBoardSize } from '../state/selectors';
+import { getScore, getBoardSize, canMakeMoreMoves } from '../state/selectors';
 import * as actions from '../state/actions';
 import './style.css';
 
@@ -43,13 +43,13 @@ class App extends Component {
   }
 
   render() {
-    const { score } = this.props;
+    const { score, canMakeMoreMoves } = this.props;
 
     return (
       <div className="App">
         <h1>2048</h1>
         <Menu />
-        <h2>Score: {score}</h2>
+        <h2>Score: {score} {canMakeMoreMoves ? null : '(Game over)'}</h2>
         <Board />
       </div>
     );
@@ -63,13 +63,15 @@ App.propTypes = {
   onKeyUp: PropTypes.func,
   onKeyRight: PropTypes.func,
   onKeyLeft: PropTypes.func,
-  onKeyDown: PropTypes.func
+  onKeyDown: PropTypes.func,
+  canMakeMoreMoves: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
   return {
     score: getScore(state),
-    boardSize: getBoardSize(state)
+    boardSize: getBoardSize(state),
+    canMakeMoreMoves: canMakeMoreMoves(state)
   };
 };
 
