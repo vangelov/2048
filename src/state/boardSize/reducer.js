@@ -5,12 +5,12 @@ const initialState = {
   canBeUsed: true
 };
 
-const minSize = 2;
+export const MIN_SIZE = 2;
 
 export default (state = initialState, action) => {
   switch(action.type) {
     case actions.BOARD_SIZE_UPDATE:
-      const canBeUsed = !isNaN(action.value) && action.value >= minSize;
+      const canBeUsed = !isNaN(action.value) && action.value >= MIN_SIZE;
 
       return {
         value: canBeUsed ? Number(action.value) : action.value,
