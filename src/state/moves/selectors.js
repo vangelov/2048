@@ -7,6 +7,8 @@ export const getScore = ({ moves }) => moves.list.reduce(
 
 export const canUndo = ({ moves }) => moves.list.length > 1;
 
+export const getMovesCount = ({ moves }) => moves.list.length;
+
 const neighboursDiffs = [
   { diffI: -1, diffJ:  0 },
   { diffI: +1, diffJ:  0 },

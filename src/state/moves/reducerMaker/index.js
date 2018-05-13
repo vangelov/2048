@@ -20,21 +20,18 @@ export default function(
 
     switch (action.type) {
       case actions.MOVE_INIT:
-        if (action.onlyIfNoSavedState && state.list.length > 1) {
+        const hasSavedState = state.list.length > 0;
+        if (action.onlyIfNoSavedState && hasSavedState) {
           return state;
         }
 
         let initBoard = boardUtils.create(action.boardSize);
 
-        ({
-          nextFreePosition,
-          updatedRngCache
-        } = getNextFreePosition(initBoard, state.length, {}));
+        ({ nextFreePosition, updatedRngCache } =
+          getNextFreePosition(initBoard, state.length, {}));
 
-        ({
-          nextNumber,
-          updatedRngCache
-        } = getNextNumber(state.length, updatedRngCache));
+        ({ nextNumber, updatedRngCache } =
+          getNextNumber(state.length, updatedRngCache));
 
         initBoard = boardUtils.addNumber(initBoard, nextNumber, nextFreePosition);
 
@@ -55,15 +52,11 @@ export default function(
         const { board } = state.list[state.list.length - 1];
         let { movedBoard, scoreWon } = moveBoard(board, action.type);
 
-        ({
-          nextFreePosition,
-          updatedRngCache
-        } = getNextFreePosition(movedBoard, state.list.length, state.rngCache));
+        ({ nextFreePosition, updatedRngCache } =
+          getNextFreePosition(movedBoard, state.list.length, state.rngCache));
 
-        ({
-          nextNumber,
-          updatedRngCache
-        } = getNextNumber(state.list.length, updatedRngCache));
+        ({ nextNumber, updatedRngCache } =
+          getNextNumber(state.list.length, updatedRngCache));
 
         movedBoard = boardUtils.addNumber(movedBoard, nextNumber, nextFreePosition);
 
