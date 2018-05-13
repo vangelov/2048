@@ -1,5 +1,5 @@
-import reducerMaker from './index';
-import * as actions from '../actions';
+import reducerMaker from './reducerMaker';
+import * as actions from './actions';
 
 describe('moves reducer maker', () => {
 

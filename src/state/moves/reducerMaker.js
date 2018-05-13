@@ -1,8 +1,8 @@
 
-import * as actions from '../actions';
+import * as actions from './actions';
 import { getRandomNumber, getRandomFreePosition } from './random';
-import moveBoard from '../moveBoard';
-import * as boardUtils from '../boardUtils';
+import moveBoard from './moveBoard';
+import * as boardUtils from './boardUtils';
 
 const initialState = {
   list: [],

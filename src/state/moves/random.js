@@ -1,4 +1,4 @@
-import * as boardUtils from '../boardUtils';
+import * as boardUtils from './boardUtils';
 
 function getCachedRandom(key, rngCache) {
   let randomNumber = rngCache[key];
