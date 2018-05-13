@@ -5,11 +5,15 @@ import PropTypes from 'prop-types';
 import './style.css';
 import Button from './Button';
 import SizeLabel from './SizeLabel';
-import { canUndo, getBoardSize } from '../../state/selectors';
+import {
+  canUndo,
+  getBoardSizeValue,
+  canUseBoardSizeValue
+} from '../../state/selectors';
 import * as actions from '../../state/actions';
 
 export function Menu(props) {
-  const { canUndo, boardSize } = props;
+  const { canUndo, boardSize, canStartGame } = props;
 
   function handleNewGame() {
     props.onNewGame(boardSize);
@@ -24,7 +28,7 @@ export function Menu(props) {
   return (
     <div className="Menu">
       <SizeLabel />
-      <Button label="New Game" onClick={handleNewGame} />
+      <Button label="New Game" enabled={canStartGame} onClick={handleNewGame} />
       <Button label="Undo (Z)" enabled={canUndo} onClick={handleUndo} />
     </div>
   );
@@ -32,7 +36,7 @@ export function Menu(props) {
 
 Menu.propTypes = {
   canUnfo: PropTypes.bool,
-  boardSize: PropTypes.number,
+  boardSize: PropTypes.any,
   onUndo: PropTypes.func,
   onNewGame: PropTypes.func
 };
@@ -40,7 +44,8 @@ Menu.propTypes = {
 const mapStateToProps = (state) => {
   return {
     canUndo: canUndo(state),
-    boardSize: getBoardSize(state)
+    canStartGame: canUseBoardSizeValue(state),
+    boardSize: getBoardSizeValue(state)
   };
 };
 

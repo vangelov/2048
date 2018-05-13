@@ -4,11 +4,20 @@ import PropTypes from 'prop-types';
 
 import Menu from './Menu';
 import Board from './Board';
-import { getScore, getBoardSize, canMakeMoreMoves } from '../state/selectors';
+import {
+  getScore,
+  getBoardSizeValue,
+  canMakeMoreMoves
+} from '../state/selectors';
 import * as actions from '../state/actions';
 import './style.css';
 
 export class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.bodyDOMNode = document.querySelector('body');
+  }
 
   componentWillMount() {
     const { onWillMount, boardSize } = this.props;
@@ -16,16 +25,19 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    const body = document.querySelector('body');
-    body.addEventListener('keydown', this.handleKeyDown);
+    this.bodyDOMNode.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    const body = document.querySelector('body');
-    body.removeEventListener('keydown', this.handleKeyDown);
+    this.bodyDOMNode.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  handleKeyDown = ({ keyCode }) => {
+  handleKeyDown = (event) => {
+    if (event.target !== this.bodyDOMNode) {
+      return;
+    }
+    const { keyCode } = event;
+
     const up = 38;
     const right = 39;
     const down = 40;
@@ -61,7 +73,7 @@ export class App extends Component {
 
 App.propTypes = {
   score: PropTypes.number,
-  boardSize: PropTypes.number,
+  boardSize: PropTypes.any,
   onWillMount: PropTypes.func,
   onKeyUp: PropTypes.func,
   onKeyRight: PropTypes.func,
@@ -74,7 +86,7 @@ App.propTypes = {
 const mapStateToProps = (state) => {
   return {
     score: getScore(state),
-    boardSize: getBoardSize(state),
+    boardSize: getBoardSizeValue(state),
     canMakeMoreMoves: canMakeMoreMoves(state)
   };
 };
