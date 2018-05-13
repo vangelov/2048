@@ -1,5 +1,6 @@
 import * as boardUtils from './boardUtils';
 
+/* random should be a method which returns a number in [0; 1) */
 export function getCachedRandom(key, rngCache, random) {
   let randomNumber = rngCache[key];
   let updatedRngCache = rngCache;
@@ -44,7 +45,7 @@ export function getRandomFreePosition(
   if (freePositions.length > 0) {
     const key = `position-${movesCount}`;
     const {
-      randomNumber, 
+      randomNumber,
       updatedRngCache
     } = getCachedRandom(key, rngCache, random);
     const positionIndex = Math.floor(randomNumber * freePositions.length);
