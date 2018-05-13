@@ -81,7 +81,7 @@ const turnsToNormalizeForActionType = {
 
 const turnsTypesCount = Object.keys(turnsToNormalizeForActionType).length;
 
-function moveBoard(board, actionType) {
+export default function moveBoard(board, actionType) {
   const turns = turnsToNormalizeForActionType[actionType];
   let rotatedBoard = board;
 
@@ -97,5 +97,3 @@ function moveBoard(board, actionType) {
 
   return { movedBoard: movedAndRotatedBoard, scoreWon };
 }
-
-export default moveBoard;

@@ -1,3 +1,17 @@
+export function create(size) {
+  if (size <= 0) {
+    throw new Error('Cannot create board with size ' + size);
+  }
+
+  const board = new Array(size);
+
+  for (let i = 0; i < size; i++) {
+    board[i] = new Array(size).fill(0);
+  }
+
+  return board;
+}
+
 export function getFreePositions(board) {
   const freePositions = [];
   const rowsCount = board.length;
@@ -12,16 +26,6 @@ export function getFreePositions(board) {
   }
 
   return freePositions;
-}
-
-export function create(size) {
-  const board = new Array(size);
-
-  for (let i = 0; i < size; i++) {
-    board[i] = new Array(size).fill(0);
-  }
-
-  return board;
 }
 
 export function addNumber(board, number, position) {

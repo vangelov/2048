@@ -8,7 +8,7 @@ import { getScore, getBoardSize, canMakeMoreMoves } from '../state/selectors';
 import * as actions from '../state/actions';
 import './style.css';
 
-class App extends Component {
+export class App extends Component {
 
   componentWillMount() {
     const { onWillMount, boardSize } = this.props;
