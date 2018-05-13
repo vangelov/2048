@@ -9,7 +9,7 @@ const turnsToNormalizeForActionType = {
 
 const turnsTypesCount = Object.keys(turnsToNormalizeForActionType).length;
 
-/* We have the logic the move the board to the left so we transform all
+/* We have the logic to move the board to the left so we transform all
   other cases to this */
 export default function moveBoard(board, actionType) {
   const turns = turnsToNormalizeForActionType[actionType];
