@@ -5,7 +5,7 @@ describe('random', () => {
 
   describe('getCachedRandom', () => {
 
-    it('generates the value and updates the cached if the key is new', () => {
+    it('generates the value and updates the cache if the key is new', () => {
       const randomNumber = 8;
       const rngCache = {};
       const key = 'test';
@@ -27,7 +27,7 @@ describe('random', () => {
       const actualResult = getCachedRandom(key, rngCache, () => randomNumber);
       const expectedResult = {
         randomNumber: rngCache[key],
-        updatedRngCache: rngCache 
+        updatedRngCache: rngCache
       };
 
       expect(actualResult).toEqual(expectedResult);
