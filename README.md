@@ -21,7 +21,7 @@ Missing features:
 - `yarn/npm install`
 - `yarn/npm start`
 
-This runs the app in development. In order to build it for production run:
+This runs the app in development mode. In order to build it for production run:
 
 * `yarn/npm build`
 
