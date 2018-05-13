@@ -35,7 +35,7 @@ This runs the app in development. In order to build it for production run:
 
     	        /ComponentX
                     /ComponentY
-                    /ComponentZ 
+                    /ComponentZ
                     index.js
                     style.css
 
@@ -46,8 +46,8 @@ This runs the app in development. In order to build it for production run:
                 /reducerNameInTheStoreX
                     /reducerNameInTheStoreY
                     /reducerNameInTheStoreZ
-                    reducer/reducerMaker.js
-                    reducer/reducerMaker.test.js
+                    reducer.js (or reducerMaker.js)
+                    reducer.test.s (or reducerMaker.test.js)
                     selectors.js
                     selectors.test.js
                     actions.js
