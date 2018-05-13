@@ -5,11 +5,11 @@ An implementation of the popular game.
 
 ## Additional features:
 
-* Undo 
+* Undo
 * Retaining the game state between page reloads
 * Custom size for the board
 
-**Note**: If you select undo several times and then use the same moves to go back to the state before the undo, the app wil insert the same symbols at the same positions.
+**Note**: If you select undo several times and then use the same moves to go back to the state before the undo, the app will insert the same symbols at the same positions.
 
 Missing features:
 
@@ -35,17 +35,17 @@ This runs the app in development. In order to build it for production run:
 
     	        /ComponentX
                     /ComponentY
-                    /ComponentZ
+                    /ComponentZ 
                     index.js
                     style.css
 
-    The file tree structure mimics the render tree on the DOM, i.e. if `ComponentX` contains or may contain `ComponentY` or `ComponentZ` as children, the last two are subfolders in the `/ComponentX` folder. This organization allows us to easily see the UI structure of app.
+    The file tree structure mimics the render tree on the DOM, i.e. if `ComponentX` contains or may contain `ComponentY` or `ComponentZ` as children, the last two are subfolders of the `/ComponentX` folder. This organization allows us to easily see the UI structure of app.
 
- * `/state`: Contains all code related to the app state: actions, selectors, reducers, etc. The folder is organized by app feature and has the same organization as the reducers tree in the Redux store. It has the following recursive tree structure and file name conventions:
+ * `/state`: Contains all code related to the app state: actions, selectors, reducers, etc. The folder is organized by the reducer name in the store. It has the following recursive tree structure and file name conventions:
 
-                /featureX
-                    /featureY
-                    /featureZ
+                /reducerNameInTheStoreX
+                    /reducerNameInTheStoreY
+                    /reducerNameInTheStoreZ
                     reducer/reducerMaker.js
                     reducer/reducerMaker.test.js
                     selectors.js
